@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <%- include('./partials/head.ejs') %>
+   <title>Quill.io - Sign Up</title>
+</head>
+<body>
+   <%- include('./partials/navbar.ejs') %>
+   <div class="container flex">
+      <form method="post" action="/user/signup">
+         <div class="mb-3 mt-5">
+           <label for="fullName" class="form-label">Name</label>
+           <input type="text" class="form-control" name="fullName" id="fullName" aria-describedby="fullName">
+         </div>
+
+         <div class="mb-3">
+           <label for="email" class="form-label">Email address</label>
+           <input type="email" class="form-control" name="email" id="email" aria-describedby="email">
+         </div>
+
+         <div class="mb-3">
+           <label for="password" class="form-label">Password</label>
+           <input type="password" class="form-control" name="password" id="password">
+         </div>
+
+         <button type="submit" class="btn btn-primary">Submit</button>
+       </form>
+   </div>
+   <%- include('./partials/scripts.ejs') %>
+</body>
+</html>
