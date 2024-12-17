@@ -1,8 +1,9 @@
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const connectToMongoDB = require('./conn');
 const cookieParser = require('cookie-parser');
-require('dotenv').config();
 
 const userRoute = require('./routes/user');
 const blogRoute = require('./routes/blog');
@@ -46,5 +47,5 @@ app.get('/', async (req, res) => {
 })
 
 app.listen(PORT, () => {
-   console.log(`Server listening at ${process.env.HOST_URL}:${PORT}`)
+   console.log(`Server listening at PORT: ${PORT}`)
 })
