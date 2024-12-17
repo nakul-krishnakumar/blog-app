@@ -18,7 +18,7 @@ const userSchema = new mongoose.Schema({
    },
    profileImageURL: {
       type: String,
-      default: "/images/profile-circle.svg",
+      default: "/images/profile-circle.png",
    },
    role: {
       type: String,

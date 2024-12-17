@@ -2,21 +2,23 @@
 <html lang="en">
 <head>
    <%- include('./partials/head.ejs') %>
-   <title>Document</title>
+   <title>Quillio - Home</title>
 </head>
 <body>
    <%- include('./partials/scripts.ejs') %>
    <%- include('./partials/navbar.ejs') %>
 
    <% if (locals.blogs) { %>
-      <ul class="flex-lg-row gap-5 mt-5 over">
+      <div class="container mt-3 row row-cols-4 w-75 mx-auto row-gap-3">
          <% locals.blogs.forEach(blog => { %>
-            <div class="card" style="width: 18rem;">
-               <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="Cover Image">
-               <div class="card-body">
-                 <h5 class="card-title"><%= blog.title %></h5>
-                 <p class="card-text"><%= blog.body.substring(0, 50) %>...</p>
-                 <a href='/blog/<%= blog._id %>' class="btn btn-primary">See More</a>
+            <div class="col">
+               <div class="card h-100px" style="width: 18rem;">
+                  <img src="<%= blog.coverImageURL %>" class="card-img-top" alt="Cover Image">
+                  <div class="card-body">
+                     <h5 class="card-title"><%= blog.title %></h5>
+                     <p class="card-text"><%= blog.body.substring(0, 200) %>...</p>
+                     <a href='/blog/<%= blog._id %>' class="btn btn-primary">See More</a>
+                  </div>
                </div>
             </div>
          <% }) %>
