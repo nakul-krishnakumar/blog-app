@@ -39,11 +39,10 @@ app.use('/blog', blogRoute);
 // base url
 app.get('/', async (req, res) => {
    const allBlogs = await Blog.find({});
-   console.log(allBlogs);
-   res.status(200).render('home', {
+   return res.status(200).render('home', {
       user: req.user,
       blogs: allBlogs
-   })
+   });
 })
 
 app.listen(PORT, () => {

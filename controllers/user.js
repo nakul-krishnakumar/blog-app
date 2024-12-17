@@ -40,9 +40,10 @@ const createNewUserAndSignUp = async (req, res) => {
    return res.status(201).redirect('/');
 }
 
-const logOutUserAndClearToken = (req, res) => {
+const logOutUserAndClearToken = async (req, res) => {
    res.clearCookie('token');
-   return res.status(200).render('home');
+   const allBlogs = await Blog.find({});
+   return res.status(200).render('home', { blogs: allBlogs });
 }
 
 module.exports = {
