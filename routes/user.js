@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { renderSignInPage, authorizeAndSignInUser, createNewUserAndSignUp, logOutUserAndClearToken } = require('../controllers/user');
+const { renderSignInPage, authorizeAndSignInUser, renderSignUpPage, createNewUserAndSignUp, logOutUserAndClearToken } = require('../controllers/user');
 
 const router = Router();
 
@@ -10,7 +10,7 @@ router.route('/signin')
 
 // ROUTE 2: /user/signup
 router.route('/signup') 
-   .get(renderSignInPage)
+   .get(renderSignUpPage)
    .post(createNewUserAndSignUp);
 
 // ROUTE 3: /user/logout
