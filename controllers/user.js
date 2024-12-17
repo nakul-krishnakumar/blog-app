@@ -25,11 +25,17 @@ const renderSignUpPage = (req, res) => {
 const createNewUserAndSignUp = async (req, res) => {
    const { fullName, email, password } = req.body;
 
-   const user = await User.create({
-      fullName: fullName,
-      email: email,
-      password: password
-   });
+   try {
+      const user = await User.create({
+         fullName: fullName,
+         email: email,
+         password: password
+      });
+   } catch (error) {
+      return res.status(400).render('signup', {
+         error: "Email already exists"
+      })
+   }
    
    return res.status(201).redirect('/');
 }
