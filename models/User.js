@@ -1,5 +1,6 @@
 const argon2 = require('argon2')
 const mongoose = require('mongoose');
+const { createTokenForUser } = require("../services/auth");
 
 const userSchema = new mongoose.Schema({
    fullName: {
@@ -26,14 +27,16 @@ const userSchema = new mongoose.Schema({
    }
 }, { timestamps: true});
 
-userSchema.static("matchPassword", async function (email, password) {
+userSchema.static("matchPasswordAndGenerateToken", async function (email, password) {
    const user = await this.findOne({ email });
    if (!user) throw new Error('User not found!');
 
    const flag = await argon2.verify(user.password, password);
 
+   const token = createTokenForUser(user);
+
    if (!flag) throw new Error('Incorrect Password');
-   else return user;
+   else return token;
 });
 
 userSchema.pre('save', async function (next) {

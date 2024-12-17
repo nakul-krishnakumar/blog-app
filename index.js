@@ -1,9 +1,13 @@
 const express = require('express');
 const path = require('path');
 const connectToMongoDB = require('./conn');
+const cookieParser = require('cookie-parser');
 require('dotenv').config();
 
 const userRoute = require('./routes/user');
+const blogRoute = require('./routes/blog');
+const { checkForAuthenticationCookie } = require("./middlewares/auth");
+const Blog = require("./models/Blog");
 
 const app = express();
 
@@ -21,16 +25,24 @@ app.set('views', path.resolve('./views'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(express.static('public'));
+app.use(cookieParser());
+app.use(checkForAuthenticationCookie("token"));
+app.use(express.static(path.resolve("./public")));
 
 const PORT = process.env.PORT || 8080;
 
 // SUB ROUTES
 app.use('/user', userRoute);
+app.use('/blog', blogRoute);
 
 // base url
-app.get('/', (req, res) => {
-   res.status(200).render('home')
+app.get('/', async (req, res) => {
+   const allBlogs = await Blog.find({});
+   console.log(allBlogs);
+   res.status(200).render('home', {
+      user: req.user,
+      blogs: allBlogs
+   })
 })
 
 app.listen(PORT, () => {
