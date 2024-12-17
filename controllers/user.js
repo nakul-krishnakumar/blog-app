@@ -1,4 +1,5 @@
 const User = require('../models/User');
+const Blog = require('../models/Blog');
 
 const renderSignInPage = (req, res) => {
    return res.status(200).render('signin');
